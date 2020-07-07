@@ -42,7 +42,7 @@ class Ventas extends BaseController
 	public function add_sells()
 	{
 
-		print_r($_POST);
+		
 
 		$data = [
 
@@ -56,22 +56,14 @@ class Ventas extends BaseController
 		$data = $this->ventas->insert($data);
 
 
+		$data1 = [
 
-		$id_products 	= $this->request->getPostGet( 'idarticulo' );
-			
+			'id_sell' 			=> $data,
+			'id_products' 		=> $this->request->getPostGet( 'idarticulo' ),
+			'quantity' 			=> $this->request->getPostGet( 'cantidad' )
+		];
 
-		for ($i=0; $i >= $id_products ; $i++) { 
-
-			$id_sell 		= $data;
-			$id_products 	= $this->request->getPostGet( 'idarticulo' );
-			$quantity 		= $this->request->getPostGet( 'cantidad' );
-
-			
-			$data1 = $this->ventas->insertDetalle($id_sell, $id_products, $quantity );
-		}
-	
-
-		
+		$data1 = $this->ventas->insertDetalle($data1);
 
 
 	}

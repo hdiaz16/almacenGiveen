@@ -50,14 +50,30 @@ class VentasModel extends Model
                 return $query->getResult();
         }
 
-        public function insertDetalle($id_sell, $id_products, $quantity )
+        public function insertDetalle($data)
         {
-                $query = $this->db->query("
-                        INSERT INTO detalle_venta (id_sell ,id_products ,quantity ) 
+               $num_elementos = 0;
 
-                        VALUES('$id_sell','$id_products','$quantity'); " 
-                );
+              
+
+                while ( $num_elementos < count( $data['id_products'] )  ) {
+
+                        print_r($data);
+                        exit();
+
+                        $query = $this->db->query("
+                                INSERT INTO detalle_venta (id_sell ,id_products ,quantity ) 
+
+                                VALUES( $data['id_sell'], $data['id_products'][$num_elementos], $data['quantity'][$num_elementos] ) ; " 
+                        );
+                        
+                }
+
                 return $query->getResult();
+
+
+
+                
         }
         
 
