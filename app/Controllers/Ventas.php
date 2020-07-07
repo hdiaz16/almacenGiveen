@@ -26,7 +26,7 @@ class Ventas extends BaseController
 			'img' 				=> $this->session->get('img'),
 			'typeOfPlatform'	=> $this->ventas->type_of_platforms(),
 			'listOfProducts' 	=> $this->products->list_products(),
-			'typeRecipe' 		=> $this->ventas->type_recipe(),
+			'typeRecipe' 		=> $this->ventas->type_recipe()
 		];
 	}
 
@@ -36,6 +36,44 @@ class Ventas extends BaseController
 
 		$estructur =  view('main/header', $this->data).view('ventas/ventas', $this->data).view('main/footer');
 		return $estructur;
+	}
+
+
+	public function add_sells()
+	{
+
+		print_r($_POST);
+
+		$data = [
+
+			'id_user' 			=> $this->request->getPostGet( 'idUser' ),
+			'id_platform' 		=> $this->request->getPostGet( 'typeOfPlatform' ),
+			'type_of_recipe' 	=> $this->request->getPostGet( 'typeRecipe' ),
+			'date' 				=> $this->request->getPostGet( 'date' )
+		];
+
+
+		$data = $this->ventas->insert($data);
+
+
+
+		$id_products 	= $this->request->getPostGet( 'idarticulo' );
+			
+
+		for ($i=0; $i >= $id_products ; $i++) { 
+
+			$id_sell 		= $data;
+			$id_products 	= $this->request->getPostGet( 'idarticulo' );
+			$quantity 		= $this->request->getPostGet( 'cantidad' );
+
+			
+			$data1 = $this->ventas->insertDetalle($id_sell, $id_products, $quantity );
+		}
+	
+
+		
+
+
 	}
 
 

@@ -15,7 +15,7 @@ class VentasModel extends Model
         protected $useTimestamps = true;
         protected $createdField  = 'created_at';
         protected $updatedField  = 'updated_at';
-        protected $deletedField  = 'deleted';
+        protected $deletedField  = 'deleted_at';
 
         protected $validationRules    = [];
         protected $validationMessages = [];
@@ -47,6 +47,16 @@ class VentasModel extends Model
         public function type_recipe()
         {
                 $query = $this->db->query("SELECT * FROM `ct_recipe` ;" );
+                return $query->getResult();
+        }
+
+        public function insertDetalle($id_sell, $id_products, $quantity )
+        {
+                $query = $this->db->query("
+                        INSERT INTO detalle_venta (id_sell ,id_products ,quantity ) 
+
+                        VALUES('$id_sell','$id_products','$quantity'); " 
+                );
                 return $query->getResult();
         }
         

@@ -10,10 +10,10 @@ function agregarDetalle(idarticulo,articulo){
 	if (idarticulo!="") {
 		var subtotal=cantidad;
 		var fila='<tr class="filas text-center" id="fila'+cont+'">'+
-        '<td><button type="button" class="btn btn-sm danger " onclick="eliminarDetalle('+cont+')"><i class="fa fa-remove"></i></button></td>'+
-        '<td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td>'+
-        '<td><input  class="md-input cantidad" type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-        '<td><span id="subtotal'+cont+'" name="subtotal">'+subtotal+'</span></td>'+
+        	'<td><button type="button" class="btn btn-sm danger " onclick="eliminarDetalle('+cont+')"><i class="fa fa-remove"></i></button></td>'+
+        	'<td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</td>'+
+        	'<td><input  class="md-input cantidad" type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
+        	'<td><span id="subtotal'+cont+'" name="subtotal">'+subtotal+'</span></td>'+
 		'</tr>';
 		cont++;
 		detalles++;
@@ -73,3 +73,40 @@ function eliminarDetalle(indice){
 
 
 
+
+
+
+$('#addSells').click(function () {
+
+			var formData = new FormData(document.getElementById("formDataSells"));
+
+		$.ajax ( {
+		    url : 'add-sells',
+		    type : 'POST',
+    		dataType: 'json',
+    		data:formData,
+          	processData: false, 
+          	contentType: false,
+		    success : function(data) {
+
+		    	if (data.error === false) {
+
+		    		tata.success( data.title, data.data, {
+				  		duration: 5000,
+				  		animate: 'slide'
+					});
+
+		    	}else{
+		    		tata.danger( data.title, data.data, {
+				  		duration: 5000,
+				  		animate: 'slide'
+					});
+
+		    	}
+		        
+
+
+		   	}
+		});
+
+	});

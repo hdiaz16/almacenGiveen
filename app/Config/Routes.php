@@ -47,7 +47,7 @@ $routes->add('/delete-products', 'Products::deleteProducts');
 
 
 $routes->add('/ventas', 'Ventas::ventas');
-
+$routes->add('/add-sells', 'Ventas::add_sells');
 
 
 
