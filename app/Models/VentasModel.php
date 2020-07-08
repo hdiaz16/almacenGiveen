@@ -10,7 +10,7 @@ class VentasModel extends Model
         protected $returnType = 'array';
         protected $useSoftDeletes = true;
 
-        protected $allowedFields = ['name', 'email', 'password', 'username', 'password' , 'img', 'id_type_user', 'online', 'offline'];
+        protected $allowedFields = ['id_user', 'id_platform', 'type_of_recipe','total_products','date'];
 
         protected $useTimestamps = true;
         protected $createdField  = 'created_at';
@@ -50,31 +50,6 @@ class VentasModel extends Model
                 return $query->getResult();
         }
 
-        public function insertDetalle($data)
-        {
-               $num_elementos = 0;
-
-              
-
-                while ( $num_elementos < count( $data['id_products'] )  ) {
-
-                        print_r($data);
-                        exit();
-
-                        $query = $this->db->query("
-                                INSERT INTO detalle_venta (id_sell ,id_products ,quantity ) 
-
-                                VALUES( $data['id_sell'], $data['id_products'][$num_elementos], $data['quantity'][$num_elementos] ) ; " 
-                        );
-                        
-                }
-
-                return $query->getResult();
-
-
-
-                
-        }
         
 
 }

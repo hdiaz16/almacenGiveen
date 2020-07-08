@@ -2,6 +2,7 @@
 
 use CodeIgniter\Controller;
 use App\Models\VentasModel;
+use App\Models\DetalleVentasModel;
 use App\Models\ProductsModel;
 
 class Ventas extends BaseController
@@ -12,15 +13,20 @@ class Ventas extends BaseController
 	public $request;
 	public $session;
 	public $data;
+	public $detailsSells;
 
-	public function __construct($ventas = 0,$request = 0, $session = 0,  $data = 0, $products = 0  )
+
+	public function __construct($ventas = 0,$request = 0, $session = 0,  $data = 0, $products = 0, $detailsSells = 0  )
 	{
 		$this->ventas = new VentasModel();
 		$this->request = \Config\Services::request();
 		$this->session = session();
 		$this->products  = new ProductsModel();
+		$this->detailsSells  = new DetalleVentasModel();
+
 
 		$this->data = [
+			'id' 				=> $this->session->get('id'),
 			'name' 				=> $this->session->get('name'),
 			'email' 			=> $this->session->get('email'),
 			'img' 				=> $this->session->get('img'),
@@ -41,7 +47,9 @@ class Ventas extends BaseController
 
 	public function add_sells()
 	{
-
+		$idProducts 	= 	$this->request->getPostGet( 'idarticulo' );
+		$quantity 		= 	$this->request->getPostGet( 'cantidad' );
+		$num_element	= 0;
 		
 
 		$data = [
@@ -49,21 +57,34 @@ class Ventas extends BaseController
 			'id_user' 			=> $this->request->getPostGet( 'idUser' ),
 			'id_platform' 		=> $this->request->getPostGet( 'typeOfPlatform' ),
 			'type_of_recipe' 	=> $this->request->getPostGet( 'typeRecipe' ),
+			'total_products' 	=> $this->request->getPostGet( 'total_compra' ),
 			'date' 				=> $this->request->getPostGet( 'date' )
 		];
 
 
-		$data = $this->ventas->insert($data);
+		$result = $this->ventas->insert($data);
 
 
-		$data1 = [
 
-			'id_sell' 			=> $data,
-			'id_products' 		=> $this->request->getPostGet( 'idarticulo' ),
-			'quantity' 			=> $this->request->getPostGet( 'cantidad' )
-		];
+		while ($num_element < count($idProducts) && $num_element < count($quantity) ) {
 
-		$data1 = $this->ventas->insertDetalle($data1);
+
+		 	$data1 = [
+
+				'id_sell' 			=> trim( $result ),
+				'id_products' 		=> trim( $idProducts[ $num_elementos ] ),
+				'quantity' 			=> trim( $quantity[ $num_elementos ] )
+			];
+
+
+			$result1 = $this->detailsSells->insert($data1);
+
+
+		 	$num_element = $num_element++;
+
+	 	}
+
+
 
 
 	}
@@ -73,3 +94,4 @@ class Ventas extends BaseController
 	//--------------------------------------------------------------------
 
 }
+

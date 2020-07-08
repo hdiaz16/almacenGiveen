@@ -14,7 +14,8 @@
 		          	<div class="row">
 		          		<div class="col-3 ">
 			          		<div class="md-form-group ">
-				              	<input class="md-input " name="idUser" id="idUser" value=" <?php echo $name ?> " readonly>
+				              	<input class="md-input " name="name" id="name" value=" <?php echo $name ?> " readonly>
+				              	<input class="md-input " name="idUser" id="idUser" value=" <?php echo $id ?> " readonly hidden="true">
 				              	<label>¿Quien ingresa? </label>
 				            </div>
 			          	</div>
