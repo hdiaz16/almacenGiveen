@@ -43,7 +43,7 @@ $routes->add('/products', 'Products::products');
 $routes->add('/add-products', 'Products::addProducts');
 $routes->add('/list-products', 'Products::listProducts');
 $routes->add('/delete-products', 'Products::deleteProducts');
-
+$routes->add('/edit-products', 'Products::editProducts');
 
 
 $routes->add('/ventas', 'Ventas::ventas');

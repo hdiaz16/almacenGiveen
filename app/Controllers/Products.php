@@ -26,7 +26,7 @@ class Products extends BaseController
 			'contNet' 			=> $this->products->cont_net()
 		];
 	}
-	
+
 
 	public function products()
 	{
@@ -99,10 +99,22 @@ class Products extends BaseController
 	public function editProducts()
 	{
 
-		$carpetRout = "assets/images/products/";
-		$nameImg = "img".date("dHis") .".". pathinfo($_FILES["img"]["name"],PATHINFO_EXTENSION);
-		$saveCarpetRout = $carpetRout . $nameImg;
-		move_uploaded_file($_FILES["img"]["tmp_name"],$saveCarpetRout);
+		$id = $this->request->getPost( 'id' );
+
+		$fotoActual = $this->products->where('id', $id)
+                  ->first();
+
+		print_r($fotoActual);
+		exit();
+
+		$carpetRout  			= "assets/images/products/";
+		$nameImg 				= "img".date("dHis") .".". pathinfo($_FILES["img"]["name"],PATHINFO_EXTENSION);
+		$saveCarpetRoutEdit 	= $carpetRout . $nameImg;
+		move_uploaded_file($_FILES["img"]["tmp_name"],$saveCarpetRoutEdit);
+
+		
+
+		
 		
 		$data = [
 
@@ -115,18 +127,18 @@ class Products extends BaseController
 			'cantidad_min' 		=> $this->request->getPost( 'cantidadMinima' ),
 			'cantidad_caja' 	=> $this->request->getPost( 'cantidadPorCaja' ),
 			'ubicacion' 		=> $this->request->getPost( 'ubicacion' ),
-			'img'				=> $saveCarpetRout != null ? $saveCarpetRou : "",
+			'img'				=> $saveCarpetRoutEdit != null ? $saveCarpetRoutEdit : "",
 		];
 
-		$data = $this->products->insert($data);
+		$data = $this->products->update($id, $data);
 
 		if ( isset( $data ) ) {
 
-			$result = array( 'error' => false, 'title' => "Producto guardado" ,'data' => "El producto se guardo correctamente" ); 
+			$result = array( 'error' => false, 'title' => "Producto editado" ,'data' => "El producto se edito correctamente" ); 
 			echo json_encode( $result ); 
 		}else{
 
-			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "El producto no se guardo correctamente, si el error persiste comunicate con el administardor " );
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "El producto no se edito  correctamente, si el error persiste comunicate con el administardor " );
 			echo json_encode( $result );
 
 		}

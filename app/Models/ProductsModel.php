@@ -53,7 +53,7 @@ class ProductsModel extends Model
         {
             $query =  $this->db->query(
 
-                " SELECT products.*,  tipo.name AS nameTipo, brand.name AS nameBrand, contNet.name AS nameContNet
+                " SELECT products.*,  tipo.name AS nameTipo, tipo.id AS idTipo, brand.name AS nameBrand, brand.id AS idBrand , contNet.name AS nameContNet, contNet.id AS idContNet
 
                 FROM tbl_products AS products
                 INNER JOIN ct_type_products AS tipo ON products.id_tipo_producto = tipo.id

@@ -49,9 +49,9 @@
 			        		 						'<?php echo $row->id ?>',
 			        		 						'<?php echo $row->codigo ?>',
 			        		 						'<?php echo $row->nombre ?>',
-			        		 						'<?php echo $row->nameBrand ?>',
-			        		 						'<?php echo $row->nameTipo ?>',
-			        		 						'<?php echo $row->nameContNet ?>',
+			        		 						'<?php echo $row->idBrand ?>',
+			        		 						'<?php echo $row->idTipo ?>',
+			        		 						'<?php echo $row->idContNet ?>',
 			        		 						'<?php echo $row->cantidad ?>',
 			        		 						'<?php echo $row->cantidad_min ?>',
 			        		 						'<?php echo $row->cantidad_caja ?>',
@@ -161,6 +161,14 @@
       	<form  role="form" id="formDataProducts" enctype="multipart/formdata">
 
           	<div class="row">
+
+          		<div class="col-4 " hidden="true">
+	          		<div class="md-form-group float-label">
+	          			<label>Id</label>
+		              	<input type="text" class="md-input " required="" name="id" id="id">
+		              	
+		            </div>
+	          	</div>
 
           		<div class="col-4 ">
 	          		<div class="md-form-group float-label">
