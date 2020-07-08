@@ -134,4 +134,10 @@ function modalDeleteProduct( id ) {
 }
 
 
+function modalEditProduct( id,codigo,nombre,nameBrand,nameTipo,nameContNet,cantidad,cantidad_min,cantidad_caja,ubicacion  ) {
+
+ 	$('#idProducts').val(id);
+}
+
+
 

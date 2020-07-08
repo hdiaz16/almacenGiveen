@@ -21,9 +21,16 @@ class DetalleVentasModel extends Model
         protected $validationMessages = [];
         protected $skipValidation     = false;
 
+        public $db;
 
 
-      
+        public function __construct($db=0)
+        {
+                $this->db = \Config\Database::connect();
+        }
+
+
+       
 
 
 

@@ -44,7 +44,22 @@
 
 				        		 			<div class="col-6 btn-groups">
 				        		 				
-			        		 					<button class="btn btn-sm warn">
+			        		 					<button class="btn btn-sm warn" data-toggle="modal" data-target="#top" 
+			        		 						onclick="modalEditProduct( 
+			        		 						'<?php echo $row->id ?>',
+			        		 						'<?php echo $row->codigo ?>',
+			        		 						'<?php echo $row->nombre ?>',
+			        		 						'<?php echo $row->nameBrand ?>',
+			        		 						'<?php echo $row->nameTipo ?>',
+			        		 						'<?php echo $row->nameContNet ?>',
+			        		 						'<?php echo $row->cantidad ?>',
+			        		 						'<?php echo $row->cantidad_min ?>',
+			        		 						'<?php echo $row->cantidad_caja ?>',
+			        		 						'<?php echo $row->ubicacion ?>'
+
+			        		 						);">
+
+
 							            			<i class="fa fa-pencil"></i>
 							            		</button>
 				        		 				
@@ -124,3 +139,153 @@
     </div><!-- /.modal-content -->
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+<!-- .modal -->
+<div id="top" class="modal " data-backdrop="true" aria-hidden="true">
+  <div class="top white  p-5">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h5 class="modal-title">Editar Productos</h5>
+      </div>
+      <div class="modal-body text-center p-lg ">
+
+      	<form  role="form" id="formDataProducts" enctype="multipart/formdata">
+
+          	<div class="row">
+
+          		<div class="col-4 ">
+	          		<div class="md-form-group float-label">
+	          			<label>Codigo</label>
+		              	<input type="text" class="md-input " required="" name="codigo" id="codigo">
+		              	
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 text-center" id="codeBar">
+	          		<div class="md-form-group " id="printBarCode">
+	          			
+		              	<svg id="barcode"></svg>
+		              	
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group float-label">
+	          		 	<label>Nombre</label>
+		              	<input type="text" class="md-input" required="" name="nombre" id="nombre">
+		              	
+		           </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group ">
+	          			<label>Marca</label>
+		             
+		              	<select class="md-input" required="" name="marca" id="marca">
+		              			<option > Seleccione una opcion</option>
+
+		              		<?php foreach ($brand as $row) { ?>
+
+		              			<option id="<?php echo $row->id ?>" name="<?php echo $row->id ?>" value="<?php echo $row->id ?>"> <?php echo $row->name; ?></option>
+
+		              		<?php } ?>
+
+		              	</select>
+		              	
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group ">
+	          			<label>Tipo de Producto</label>
+
+		              	<select class="md-input" required="" name="tipoProducto" id="tipoProducto">
+		              			<option > Seleccione una opcion</option>
+
+		              		<?php foreach ($typeProduct as $row) { ?>
+
+		              			<option id="<?php echo $row->id ?>" name="<?php echo $row->id ?>" value="<?php echo $row->id ?>"> <?php echo $row->name; ?></option>
+
+		              		<?php } ?>
+
+		              	</select>
+
+		              	
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group ">
+	          			<label> Contenido Neto</label>
+		            
+		         	 	<select class="md-input" required="" name="contenidoNeto" id="contenidoNeto">
+		              			<option > Seleccione una opcion</option>
+
+		              		<?php foreach ($contNet as $row) { ?>
+
+		              			<option id="<?php echo $row->id ?>" name="<?php echo $row->id ?>" value="<?php echo $row->id ?>"> <?php echo $row->name; ?></option>
+
+		              		<?php } ?>
+
+		              	</select>
+
+		              	
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group float-label">
+	          			<label>Cantidad (por pieza)</label>
+		              	<input type="number" class="md-input" required="" name="cantidad" id="cantidad">
+		             
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group float-label">
+	          			<label>Cantidad minima (por pieza)</label>
+		              	<input type="number" class="md-input" required="" name="cantidadMinima" id="cantidadMinima">
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group float-label">
+	          			<label>Cantidad por caja (catidad de piezas por caja)</label>
+		             	<input type="number" class="md-input" required="" name="cantidadPorCaja" id="cantidadPorCaja">
+		            </div>
+	          	</div>
+
+	          	<div class="col-4 ">
+	          		<div class="md-form-group float-label">
+	          			<label>Ubicacion</label>
+		              	<input type="text" class="md-input" required="" name="ubicacion" id="ubicacion">
+		            </div>
+	          	</div>
+
+	          	<div class="col-4">
+	          		<div class="md-form-group">
+		              	<label for="exampleInputFile">Seleccionar Imagen</label>
+		              	<input type="file" id="img" name="img" class="md-inpu has-value">
+		            </div>
+	          	</div>
+
+          	</div>
+          
+            <button type="button" class="btn m-b" id="editProducts">Editar Producto</button>
+          </form>
+        	
+      </div>
+    
+    </div><!-- /.modal-content -->
+  </div>
+</div>
+<!-- / .modal -->

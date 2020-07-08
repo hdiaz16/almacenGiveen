@@ -66,23 +66,23 @@ class Ventas extends BaseController
 
 
 
-		while ($num_element < count($idProducts) && $num_element < count($quantity) ) {
-
-
+		while ($num_element < count($idProducts) )  {
 		 	$data1 = [
-
-				'id_sell' 			=> trim( $result ),
-				'id_products' 		=> trim( $idProducts[ $num_elementos ] ),
-				'quantity' 			=> trim( $quantity[ $num_elementos ] )
+				'id_sell' 			=> $result,
+				'id_products' 		=> $idProducts[ $num_element ],
+				'quantity' 			=> $quantity[ $num_element ]
 			];
 
 
-			$result1 = $this->detailsSells->insert($data1);
+			var_dump($idProducts[ $num_element ]);
 
+
+			$query = "INSERT INTO det_sells (id_sell,id_products,quantity) VALUES(".$result.",".$idProducts[ $num_element ].",".$quantity[ $num_element ].")";
 
 		 	$num_element = $num_element++;
-
 	 	}
+
+		
 
 
 
