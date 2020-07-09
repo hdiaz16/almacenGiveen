@@ -5,18 +5,28 @@ use App\Models\UserModel;
 class Auth extends BaseController
 {
 
+	public $request;
+	public $session;
+	public $data;
+
+	public function __construct($products = 0,$request = 0, $session = 0, $data = 0)
+	{
+
+		$this->auth  = new UserModel();
+		$this->request = \Config\Services::request();
+		$this->session = session();
+	}
+
+
 	public function user()
 	{
 		
-		$request = \Config\Services::request();
-		$auth = new UserModel($db);
-		$session = session();
 		
-		$username = $request->getPostGet('login-username');
+		$username = $this->request->getPostGet('login-username');
 		
-		$password = $request->getPostGet('login-password');
+		$password = $this->request->getPostGet('login-password');
 
-		$user = $auth->user($username);
+		$user = $this->auth->user($username);
 
 		if (password_verify($password, $user->password ) && $user->username == $username ) {
 
@@ -33,8 +43,8 @@ class Auth extends BaseController
 
 			];
 
-			$session->set($sessionData);
-			$session = session();
+			$this->session->set($sessionData);
+			$this->session = session();
 
 			
 
@@ -47,7 +57,7 @@ class Auth extends BaseController
 
 
 
-				$auth->update($this->session->get('id'), $data);
+				$this->auth->update($this->session->get('id'), $data);
 
 				return redirect()->to( base_url('dashboard') );
 			}else{
@@ -72,11 +82,11 @@ class Auth extends BaseController
 	public function logOut()
 	{
 		
-		$auth = new UserModel($db);
-    	$session = session();
+
+    
 
 
-		$data = [
+		$this->data = [
         	'online'    => 0,
 			'offline'   => 1
 		];
@@ -84,8 +94,8 @@ class Auth extends BaseController
 		$auth->update($this->session->get('id'), $data);
 
 	    
-	    $session->stop();
-		$session->destroy();
+	    $this->session->stop();
+		$this->session->destroy();
 
 
 		return redirect()->to( base_url() );
@@ -96,20 +106,17 @@ class Auth extends BaseController
 	public function logOutInactivity()
 	{
 		
-		$auth = new UserModel($db);
-    	$session = session();
 
-
-		$data = [
+		$this->data = [
         	'online'    => 0,
 			'offline'   => 1
 		];
 
-		$auth->update($this->session->get('id'), $data);
+		$this->auth->update($this->session->get('id'), $data);
 
 	    
-	    $session->stop();
-		$session->destroy();
+	    $this->session->stop();
+		$this->session->destroy();
 
 
 		if($this->session->get('id') != null){

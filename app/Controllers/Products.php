@@ -99,36 +99,85 @@ class Products extends BaseController
 	public function editProducts()
 	{
 
-		$id = $this->request->getPost( 'id' );
+		$id  		  = $this->request->getPost( 'id' );
+		$tipoProducto = $this->request->getPost( 'tipoProducto' );
+		$nameProduct  = $this->request->getPost( 'nombre' );
 
-		$fotoActual = $this->products->where('id', $id)
-                  ->first();
+		switch ($tipoProducto) {
+			case 1:
+					$carpetRout  			= "assets/images/products/shampooLiquido/";
+				break;
+			case 2:
+					$carpetRout  			= "assets/images/products/shampooSolido/";
+				break;
+			case 3:
+					$carpetRout  			= "assets/images/products/ceraNatural/";
+				break;
+			case 4:
+					$carpetRout  			= "assets/images/products/crema/";
+				break;
+			case 5:
+					$carpetRout  			= "assets/images/products/sanitizante/";
+				break;
+			case 6:
+					$carpetRout  			= "assets/images/products/balsamoLabial/";
+				break;
+			case 7:
+					$carpetRout  			= "assets/images/products/gel/";
+				break;
+			case 8:
+					$carpetRout  			= "assets/images/products/alcoholGel/";
+				break;
+			case 9:
+					$carpetRout  			= "assets/images/products/tapeteSanitizantes/";
+				break;
+			
+			default:
+				# code...
+				break;
+		}
 
-		print_r($fotoActual);
-		exit();
 
-		$carpetRout  			= "assets/images/products/";
-		$nameImg 				= "img".date("dHis") .".". pathinfo($_FILES["img"]["name"],PATHINFO_EXTENSION);
+		$nameImg 				= $nameProduct.".". pathinfo($_FILES["img"]["name"],PATHINFO_EXTENSION);
 		$saveCarpetRoutEdit 	= $carpetRout . $nameImg;
 		move_uploaded_file($_FILES["img"]["tmp_name"],$saveCarpetRoutEdit);
 
 		
+		if ( move_uploaded_file($_FILES["img"]["tmp_name"],$saveCarpetRoutEdit) == true ) {
 
+			$data = [
+
+				'id_marca' 			=> $this->request->getPost( 'marca' ),
+				'id_tipo_producto' 	=> $this->request->getPost( 'tipoProducto' ),
+				'id_cont_net' 		=> $this->request->getPost( 'contenidoNeto' ),
+				'nombre' 			=> $this->request->getPost( 'nombre' ),
+				'codigo'			=> $this->request->getPost( 'codigo' ),
+				'cantidad' 			=> $this->request->getPost( 'cantidad' ),
+				'cantidad_min' 		=> $this->request->getPost( 'cantidadMinima' ),
+				'cantidad_caja' 	=> $this->request->getPost( 'cantidadPorCaja' ),
+				'ubicacion' 		=> $this->request->getPost( 'ubicacion' ),
+				'img'				=> $saveCarpetRoutEdit
+			];
+
+		}else{
+
+			$data = [
+
+				'id_marca' 			=> $this->request->getPost( 'marca' ),
+				'id_tipo_producto' 	=> $this->request->getPost( 'tipoProducto' ),
+				'id_cont_net' 		=> $this->request->getPost( 'contenidoNeto' ),
+				'nombre' 			=> $this->request->getPost( 'nombre' ),
+				'codigo'			=> $this->request->getPost( 'codigo' ),
+				'cantidad' 			=> $this->request->getPost( 'cantidad' ),
+				'cantidad_min' 		=> $this->request->getPost( 'cantidadMinima' ),
+				'cantidad_caja' 	=> $this->request->getPost( 'cantidadPorCaja' ),
+				'ubicacion' 		=> $this->request->getPost( 'ubicacion' )
+			];
+
+		}
 		
 		
-		$data = [
-
-			'id_marca' 			=> $this->request->getPost( 'marca' ),
-			'id_tipo_producto' 	=> $this->request->getPost( 'tipoProducto' ),
-			'id_cont_net' 		=> $this->request->getPost( 'contenidoNeto' ),
-			'nombre' 			=> $this->request->getPost( 'nombre' ),
-			'codigo'			=> $this->request->getPost( 'codigo' ),
-			'cantidad' 			=> $this->request->getPost( 'cantidad' ),
-			'cantidad_min' 		=> $this->request->getPost( 'cantidadMinima' ),
-			'cantidad_caja' 	=> $this->request->getPost( 'cantidadPorCaja' ),
-			'ubicacion' 		=> $this->request->getPost( 'ubicacion' ),
-			'img'				=> $saveCarpetRoutEdit != null ? $saveCarpetRoutEdit : "",
-		];
+		
 
 		$data = $this->products->update($id, $data);
 

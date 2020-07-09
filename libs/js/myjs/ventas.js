@@ -48,8 +48,6 @@ $(document).on('input', '.cantidad', function(){
 
 
 
-
-
 function calcularTotales(){
 	var sub = document.getElementsByName("subtotal");
 	var total=0.0;
@@ -74,11 +72,9 @@ function eliminarDetalle(indice){
 
 
 
-
-
 $('#addSells').click(function () {
 
-			var formData = new FormData(document.getElementById("formDataSells"));
+		var formData = new FormData(document.getElementById("formDataSells"));
 
 		$.ajax ( {
 		    url : 'add-sells',
@@ -89,6 +85,8 @@ $('#addSells').click(function () {
           	contentType: false,
 		    success : function(data) {
 
+		    	console.log(data);
+
 		    	if (data.error === false) {
 
 		    		tata.success( data.title, data.data, {
@@ -97,7 +95,7 @@ $('#addSells').click(function () {
 					});
 
 		    	}else{
-		    		tata.danger( data.title, data.data, {
+		    		tata.error( data.title, data.data, {
 				  		duration: 5000,
 				  		animate: 'slide'
 					});

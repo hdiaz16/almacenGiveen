@@ -64,27 +64,35 @@ class Ventas extends BaseController
 
 		$result = $this->ventas->insert($data);
 
+		$id_sell = $result;
 
 
-		while ($num_element < count($idProducts) )  {
-		 	$data1 = [
-				'id_sell' 			=> $result,
-				'id_products' 		=> $idProducts[ $num_element ],
-				'quantity' 			=> $quantity[ $num_element ]
-			];
+		foreach ($idProducts as $key => $id) {
+
+				$data1 = [
+					'id_sell' 			=> $id_sell,
+					'id_products' 		=> $idProducts[$key],
+					'quantity' 			=> $quantity[$key]	
+
+				];
 
 
-			var_dump($idProducts[ $num_element ]);
+			$result1 = $this->detailsSells->insert_det_sells($data1);
+				
+		}
 
 
-			$query = "INSERT INTO det_sells (id_sell,id_products,quantity) VALUES(".$result.",".$idProducts[ $num_element ].",".$quantity[ $num_element ].")";
 
-		 	$num_element = $num_element++;
-	 	}
+		if ( isset( $result1 ) ) {
 
-		
+			$result = array( 'error' => false, 'title' => "Venta guardada" ,'data' => "La venta se guardo correctamente" ); 
+			echo json_encode( $result ); 
+		}else{
 
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "La venta no se guardo correctamente, si el error persiste comunicate con el administardor " );
+			echo json_encode( $result );
 
+		}
 
 
 	}
@@ -94,4 +102,7 @@ class Ventas extends BaseController
 	//--------------------------------------------------------------------
 
 }
+
+
+
 

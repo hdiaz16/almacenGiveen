@@ -38,7 +38,7 @@ class Database extends \CodeIgniter\Database\Config
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
-		'DBDebug'  => (ENVIRONMENT !== 'production'),
+		'DBDebug'  => (ENVIRONMENT !== 'development'),
 		'cacheOn'  => false,
 		'cacheDir' => '',
 		'charset'  => 'utf8',
@@ -66,7 +66,7 @@ class Database extends \CodeIgniter\Database\Config
 		'DBDriver' => 'SQLite3',
 		'DBPrefix' => 'db_',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
 		'pConnect' => false,
-		'DBDebug'  => (ENVIRONMENT !== 'production'),
+		'DBDebug'  => (ENVIRONMENT !== 'development'),
 		'cacheOn'  => false,
 		'cacheDir' => '',
 		'charset'  => 'utf8',

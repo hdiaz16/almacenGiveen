@@ -69,4 +69,34 @@ class ProductsModel extends Model
             return $query->getResult();
         }
 
+
+        public function count_products()
+        {
+            $query =  $this->db->query(
+
+                " SELECT COUNT(id) AS numberProducts
+                FROM tbl_products 
+                ;" 
+
+            );
+
+            return $query->getRow();
+        }
+
+
+        public function count_products_deleted()
+        {
+            $query =  $this->db->query(
+
+                " SELECT COUNT(id) AS numberProductsDeleted
+                FROM tbl_products 
+
+                WHERE deleted_at = 1
+                ;" 
+
+            );
+
+            return $query->getRow();
+        }
+
 }

@@ -50,6 +50,21 @@ class VentasModel extends Model
                 return $query->getResult();
         }
 
+
+         public function count_sells()
+        {
+            $query =  $this->db->query(
+
+                " SELECT COUNT(id) AS numberSells
+                FROM tbl_sells 
+                ;" 
+
+            );
+
+            return $query->getRow();
+        }
+        
+
         
 
 }

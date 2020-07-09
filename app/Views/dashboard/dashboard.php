@@ -4,7 +4,6 @@
 <div class="padding">
 	<div class="margin">
 		<h5 class="mb-0 _300">Hi  <strong> <?php echo $name; ?></strong>, que bueno que estas de regreso</h5>
-		<small class="text-muted">Awesome uikit for your next Material Design project</small>
 	</div>
 	<div class="row">
       <div class="col-sm-6 col-md-4 col-lg-3">
@@ -15,7 +14,7 @@
             </span>
           </div>
           <div class="clear">
-            <h4 class="m-0 text-md"><a href="">75 <span class="text-sm">Ventas</span></a></h4>
+            <h4 class="m-0 text-md"><a href=""> <?php echo $this->data['countOfSells']->numberSells ?> <span class="text-sm">Ventas</span></a></h4>
             <small class="text-muted">6 waiting payment.</small>
           </div>
         </div>
@@ -28,8 +27,8 @@
             </span>
           </div>
           <div class="clear">
-            <h4 class="m-0 text-md"><a href="">40 <span class="text-sm">Productos</span></a></h4>
-            <small class="text-muted">38 Shipped.</small>
+            <h4 class="m-0 text-md"><a href=""> <?php echo $this->data['countOfProducts']->numberProducts ?> <span class="text-sm">Productos</span></a></h4>
+            <small class="text-muted"><?php  echo $this->data['countOfProductsDeleted']->numberProductsDeleted ?> Eliminados.</small>
           </div>
         </div>
       </div>

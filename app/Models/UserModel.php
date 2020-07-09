@@ -22,6 +22,13 @@ class UserModel extends Model
         protected $skipValidation     = false;
 
 
+        public $db;
+
+
+        public function __construct($db = 0)
+        {
+                
+        }
 
 
         public function user($username)
@@ -30,7 +37,6 @@ class UserModel extends Model
           
                 $query = $db->query("SELECT * FROM `tbl_users` WHERE username = \"".$username."\"; " );
 
-        
                 return $query->getRow();
         }
 
