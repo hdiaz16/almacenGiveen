@@ -2,6 +2,8 @@
 
 use CodeIgniter\Controller;
 use App\Models\ProductsModel;
+use App\Models\BoxesModel;
+use App\Models\BrandsModel;
 
 class Products extends BaseController
 {
@@ -9,39 +11,33 @@ class Products extends BaseController
 	public $request;
 	public $session;
 	public $data;
+	public $boxes;
+	public $brand;
 
-	public function __construct($products = 0,$request = 0, $session = 0, $data = 0)
+	public function __construct($products = 0,$request = 0, $session = 0, $data = 0, $boxes = 0, $brand = 0)
 	{
 		$this->products = new ProductsModel();
-		$this->request = \Config\Services::request();
-		$this->session = session();
+		$this->boxes 	= new BoxesModel();
+		$this->brand 	= new BrandsModel();
+		$this->request 	= \Config\Services::request();
+		$this->session 	= session();
 
 		$this->data = [
 			'name' 				=> $this->session->get('name'),
 			'email' 			=> $this->session->get('email'),
 			'img' 				=> $this->session->get('img'),
 			'listOfProducts' 	=> $this->products->list_products(),
+			'listOfBrands' 		=> $this->brand->list_brand(),
 			'typeProduct' 		=> $this->products->type_of_producst(),
-			'brand' 			=> $this->products->brands(),
+			'brand' 			=> $this->brand->list_brand(),
 			'contNet' 			=> $this->products->cont_net()
 		];
 	}
 
 
 	public function products()
-	{
-	
-
-		$data = [
-			'name' 			=> $this->session->get('name'),
-			'email' 		=> $this->session->get('email'),
-			'img' 			=> $this->session->get('img'),
-			'typeProduct' 	=> $this->products->type_of_producst(),
-			'brand' 		=> $this->products->brands(),
-			'contNet' 		=> $this->products->cont_net()
-		];
-	
-		$estructur =  view('main/header', $data ).view('products/addProducts', $data ).view('main/footer');
+	{	
+		$estructur =  view('main/header', $this->data ).view('products/addProducts', $this->data ).view('main/footer');
 		return $estructur;
 	}
 
@@ -55,6 +51,18 @@ class Products extends BaseController
 
 
 
+	
+	public function addStock()
+	{
+
+		$estructur =  view('main/header', $this->data ).view('products/addToStock', $this->data).view('main/footer');
+		return $estructur;
+		
+	}
+
+
+
+// Agreagr un producto 
 	public function addProducts()
 	{
 
@@ -95,7 +103,7 @@ class Products extends BaseController
 
 
 
-
+// Editar un producto 
 	public function editProducts()
 	{
 
@@ -196,7 +204,7 @@ class Products extends BaseController
 	}
 
 
-
+// Borrar un producto 
 
 	public function deleteProducts()
 	{
@@ -206,11 +214,11 @@ class Products extends BaseController
 		    'deleted_at' => 1
 		];
 
-		$data = $this->products->update($idProduct, $data);
+		$result = $this->products->update($idProduct, $data);
 		
 		
 
-		if ( isset( $data ) ) {
+		if ( $result != null  ) {
 
 			$result = array( 'error' => false, 'title' => "Producto borrado" ,'data' => "El producto se borro correctamente" ); 
 			echo json_encode( $result ); 
@@ -221,6 +229,126 @@ class Products extends BaseController
 
 		}
 	}
+
+
+
+
+
+
+
+
+	public function addBoxes()
+	{
+		
+		$data = [
+
+			'name' 			=> $this->request->getPost( 'nombreCaja' ),
+			'dimension' 	=> $this->request->getPost( 'dimensions' ),
+			'stock' 		=> $this->request->getPost( 'cantStock' ),
+			'stockMin'		=> $this->request->getPost( 'cantMinStock' )
+		];
+
+		$data = $this->boxes->insert($data);
+
+		if ( isset( $data ) ) {
+
+			$result = array( 'error' => false, 'title' => "Caja guardada" ,'data' => "La caja se guardo correctamente" ); 
+			echo json_encode( $result ); 
+		}else{
+
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "La caja no se guardo correctamente, si el error persiste comunicate con el administardor " );
+			echo json_encode( $result );
+
+		}
+	}
+
+
+	public function addBrand()
+	{
+		
+		$data = [ 'name' => $this->request->getPostGet( 'nombreMarca' ) ];
+
+
+		$result = $this->brand->insert($data);
+
+		
+		if ( isset( $result ) ) {
+
+			$result = array( 'error' => false, 'title' => "Categoria Agregada" ,'data' => "La categoria se agrego correctamente" ); 
+			echo json_encode( $result ); 
+		}else{
+
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "La categoria no se agrego correctamente, si el error persiste comunicate con el administardor " );
+			echo json_encode( $result );
+		}
+	}
+
+	public function deleteBrand()
+	{
+		$idBrand = $this->request->getPost('id');
+
+		$result = $this->brand->delete($idBrand);
+
+
+		if ( $result != null  ) {
+
+			$result = array( 'error' => false, 'title' => "Marca borrado" ,'data' => "La marca se borro correctamente" ); 
+			echo json_encode( $result ); 
+		}else{
+
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "La marca no se borro correctamente, si el error persiste comunicate con el administardor " );
+			echo json_encode( $result );
+
+		}
+	}
+
+	public function editBrand()
+	{
+		$idBrand = $this->request->getPost('id');
+
+		$data = ['name' => $this->request->getPost('nombre')];
+
+		$result = $this->brand->update($idBrand, $data);
+		
+		
+
+		if ( isset( $result ) ) {
+
+			$result = array( 'error' => false, 'title' => "Marca editada" ,'data' => "La marca se edito correctamente" ); 
+			echo json_encode( $result ); 
+		}else{
+
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "La marca no se edito correctamente, si el error persiste comunicate con el administardor " );
+			echo json_encode( $result );
+
+		}
+	}
+
+
+
+	public function addToStock()
+	{
+		$id 			= $this->request->getPostGet( 'id' );
+
+		$data = ['cantidad' => $this->request->getPostGet( 'stockNuevoAct' ) ];
+
+		$result = $this->products->update($id, $data);
+
+		if ( isset( $result ) ) {
+
+			$result = array( 'error' => false, 'title' => "Producto Actualizado" ,'data' => "El stock se actualizo correctamente" ); 
+			echo json_encode( $result ); 
+		}else{
+
+			$result = array( 'error' => true, 'title' => "Hubo un problema" ,'data' => "El stock no se actualizo correctamente, si el error persiste comunicate con el administardor " );
+			echo json_encode( $result );
+		}
+	}
+
+
+
+
+	
 
 	//--------------------------------------------------------------------
 

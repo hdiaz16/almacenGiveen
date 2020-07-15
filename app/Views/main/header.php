@@ -34,7 +34,7 @@
   <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="assets/material-design-icons/material-design-icons.css" type="text/css" />
 
-  <script src="libs/jquery/jquery/dist/jquery.js"></script>
+  
 </head>
 <body>
   <div class="app" id="app">
@@ -46,7 +46,7 @@
     <div class="left navside grey dk" layout="column">
       <div class="navbar no-radius">
         <!-- brand -->
-        <a class="navbar-brand text-center" >
+        <a class="navbar-brand text-center" href=" <?php echo base_url('dashboard') ?> ">
           <img src="assets/images/logo.png" alt="." width="100" >
         </a>
         <!-- / brand -->
@@ -63,7 +63,6 @@
                 <a href="<?php echo base_url('dashboard') ?>" >
                   <span class="nav-icon">
                     <i class="material-icons">&#xe3fc;
-                      <span ui-include="'../assets/images/i_0.svg'"></span>
                     </i>
                   </span>
                   <span class="nav-text">Dashboard</span>
@@ -80,7 +79,6 @@
                   </span>
                   <span class="nav-icon">
                     <i class="material-icons">&#xe5c3;
-                      <span ui-include="'../assets/images/i_1.svg'"></span>
                     </i>
                   </span>
                   <span class="nav-text">Almacen</span>
@@ -94,6 +92,12 @@
                   <li>
                     <a href=" <?php echo base_url('list-products') ?> " >
                       <span class="nav-text">Lista de Productos</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href=" <?php echo base_url('add-to-stock') ?> " >
+                      <span class="nav-text">Ingreso de Stock</span>
                     </a>
                   </li>
                  
@@ -169,8 +173,8 @@
                   <div class="btn-group dropdown">
                     <button class="btn white dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-fw fa-plus text-muted"></i> Nuevo</button>
                     <div class="dropdown-menu dropdown-menu-scale">
-                      <a class="dropdown-item" href="<?php echo base_url('products') ?>">Producto</a>
-                      <a class="dropdown-item" href="">Venta</a>
+                      <a class="dropdown-item" href="<?php echo base_url('products') ?>">Productos</a>
+                      <a class="dropdown-item" href="<?php echo base_url('ventas') ?>">Ventas</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item">Usuarios</a>
                     </div>
@@ -187,7 +191,6 @@
                  <i class="fa fa-sign-out fa-1x "></i>
                   
                 </a>
-                <div ui-include="'../views/blocks/dropdown.notification.html'"></div>
               </li>
              
             </ul>

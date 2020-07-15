@@ -7,9 +7,9 @@ class Auth extends BaseController
 
 	public $request;
 	public $session;
-	public $data;
 
-	public function __construct($products = 0,$request = 0, $session = 0, $data = 0)
+
+	public function __construct($request = 0, $session = 0)
 	{
 
 		$this->auth  = new UserModel();
@@ -83,15 +83,12 @@ class Auth extends BaseController
 	{
 		
 
-    
-
-
-		$this->data = [
+		$data = [
         	'online'    => 0,
 			'offline'   => 1
 		];
 
-		$auth->update($this->session->get('id'), $data);
+		$this->auth->update($this->session->get('id'), $data);
 
 	    
 	    $this->session->stop();

@@ -39,11 +39,20 @@ $routes->add('/user', 'Auth::user');
 $routes->add('/log-out', 'Auth::logOut');
 
 
-$routes->add('/products', 'Products::products');
-$routes->add('/add-products', 'Products::addProducts');
-$routes->add('/list-products', 'Products::listProducts');
-$routes->add('/delete-products', 'Products::deleteProducts');
-$routes->add('/edit-products', 'Products::editProducts');
+$routes->add('/products', 			'Products::products');
+$routes->add('/add-products', 		'Products::addProducts');
+$routes->add('/list-products', 		'Products::listProducts');
+$routes->add('/delete-products',	'Products::deleteProducts');
+$routes->add('/edit-products', 		'Products::editProducts');
+$routes->add('/add-boxes', 			'Products::addBoxes');
+$routes->add('/add-to-stock', 		'Products::addStock');
+$routes->add('/add-stock', 			'Products::addToStock');
+$routes->add('/add-brand', 			'Products::addBrand');
+$routes->add('/delete-brand', 		'Products::deleteBrand');
+$routes->add('/edit-brand', 		'Products::editBrand');
+
+
+
 
 
 $routes->add('/ventas', 'Ventas::ventas');

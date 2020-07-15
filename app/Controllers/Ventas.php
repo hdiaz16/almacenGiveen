@@ -57,7 +57,7 @@ class Ventas extends BaseController
 			'id_user' 			=> $this->request->getPostGet( 'idUser' ),
 			'id_platform' 		=> $this->request->getPostGet( 'typeOfPlatform' ),
 			'type_of_recipe' 	=> $this->request->getPostGet( 'typeRecipe' ),
-			'total_products' 	=> $this->request->getPostGet( 'total_compra' ),
+			'total_products' 	=> $this->request->getPostGet( 'totalProd' ),
 			'date' 				=> $this->request->getPostGet( 'date' )
 		];
 
@@ -69,21 +69,20 @@ class Ventas extends BaseController
 
 		foreach ($idProducts as $key => $id) {
 
-				$data1 = [
-					'id_sell' 			=> $id_sell,
-					'id_products' 		=> $idProducts[$key],
-					'quantity' 			=> $quantity[$key]	
+			$dataDet = [
+				'id_sell' 			=> $id_sell,
+				'id_products' 		=> $idProducts[$key],
+				'quantity' 			=> $quantity[$key]	
+			];
 
-				];
-
-
-			$result1 = $this->detailsSells->insert_det_sells($data1);
-				
+			$resultDet = $this->detailsSells->insert($dataDet);	
 		}
 
 
+		
 
-		if ( isset( $result1 ) ) {
+
+		if ( $resultDet != null  ) {
 
 			$result = array( 'error' => false, 'title' => "Venta guardada" ,'data' => "La venta se guardo correctamente" ); 
 			echo json_encode( $result ); 

@@ -72,15 +72,16 @@
 			        	<div class="col-12 md-form-group ">
 			        		<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
 						       <thead >
-						        <th class="text-center">Opciones</th>
-						        <th class="text-center">Producto</th>
-						        <th class="text-center">Cantidad Productos</th>
-						        <th class="text-center">Subtotal Productos</th>
+						        	<th class="text-center">Opciones</th>
+						        	<th class="text-center">Producto</th>
+						        	<th class="text-center">Cantidad Productos</th>
+						        	<th class="text-center">Subtotal Productos</th>
 						       </thead>
 						       <tfoot >
-						         <th class="text-center" >TOTAL</th>
-						         
-						         <th><h5 id="total"></h5><input type="hidden" name="total_compra" id="total_compra"></th>
+						        	<th class="text-center">TOTAL</th>
+						        	<th class="text-center"></th>
+						        	<th class="text-center"></th>
+						         	<th class="text-center"><h5 id="total"></h5><input class="md-input" name="totalProd" id="totalProd" readonly="true" hidden="true"></th>
 						       </tfoot>
 						       <tbody>
 						         
@@ -119,8 +120,8 @@
       <div class="modal-header">
       	<h5 class="modal-title">Productos</h5>
       </div>
-      <div class="modal-body text-center p-lg">
-        	<table id="productos" class="table table-striped table-bordered table-condensed table-hover">
+      	<div class="modal-body text-center p-lg">
+        	<table id="ventas" class="table table-striped table-bordered table-condensed table-hover">
 			       <thead >
 			       	<th class="text-center">Opcion</th>
 			        <th class="text-center">Codigo</th>
@@ -129,9 +130,8 @@
 			        <th class="text-center">Cantidad</th>
 			        <th class="text-center">Imagen</th>
 			        <th class="text-center">Estado</th>
-			       </thead>
-			       <tfoot >
-
+			        <tbody>
+			       	
 			       	<?php foreach ($listOfProducts as $row) {?>
 
 			       		<?php if( $row->deleted_at == 0 ) { ?>
@@ -163,13 +163,23 @@
 
 		        	<?php }  ?>
 			         
-			       </tfoot>
-			       <tbody>
-			         
 			       </tbody>
+			       </thead>
+
+			       <tfoot >
+				       	<th class="text-center">Opcion</th>
+				        <th class="text-center">Codigo</th>
+				        <th class="text-center">Nombre</th>
+				        <th class="text-center">Marca</th>
+				        <th class="text-center">Cantidad</th>
+				        <th class="text-center">Imagen</th>
+				        <th class="text-center">Estado</th>
+			         
+			       </tfoot>
+
 		    </table>
 
-      </div>
+      	</div>
     
     </div><!-- /.modal-content -->
   </div>

@@ -75,7 +75,8 @@ class ProductsModel extends Model
             $query =  $this->db->query(
 
                 " SELECT COUNT(id) AS numberProducts
-                FROM tbl_products 
+                FROM tbl_products
+                WHERE deleted_at = 0 
                 ;" 
 
             );

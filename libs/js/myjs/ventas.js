@@ -53,10 +53,12 @@ function calcularTotales(){
 	var total=0.0;
 
 	for (var i = 0; i < sub.length; i++) {
-		total += document.getElementsByName("subtotal")[i].value;
+		
+		total = parseInt(total) + parseInt(document.getElementsByName("subtotal")[i].value);
 	}
-	$("#total").html("S/." + total);
-	$("#total_venta").val(total);
+
+	$("#total").html(total);
+	$("#totalProd").val(total);
 
 }
 

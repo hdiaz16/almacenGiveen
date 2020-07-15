@@ -34,37 +34,32 @@
 			        			<tr class="text-center">
 				        		 	<td> 
 
-				        		 		<div>
-				        		 			<div class="col-6 btn-groups">
-				        		 				<button class="btn btn-sm danger " data-toggle="modal" data-target="#m-a-f" onclick="modalDeleteProduct( <?php echo $row->id ?> );" >
-								            		<i class="fa fa-remove"></i>
-								            	</button>
-								            	
-				        		 			</div>
+				        		 		<p class="btn-groups">
+				        		 		
+			        		 				<button class="btn btn-sm danger " data-toggle="modal" data-target="#m-a-f" onclick="modalDeleteProduct( <?php echo $row->id ?> );" >
+							            		<i class="fa fa-remove"></i>
+							            	</button>
+							           
+			        		 				
+		        		 					<button class="btn btn-sm warn" data-toggle="modal" data-target="#top" 
+		        		 						onclick="modalEditProduct( 
+		        		 						'<?php echo $row->id ?>',
+		        		 						'<?php echo $row->codigo ?>',
+		        		 						'<?php echo $row->nombre ?>',
+		        		 						'<?php echo $row->idBrand ?>',
+		        		 						'<?php echo $row->idTipo ?>',
+		        		 						'<?php echo $row->idContNet ?>',
+		        		 						'<?php echo $row->cantidad ?>',
+		        		 						'<?php echo $row->cantidad_min ?>',
+		        		 						'<?php echo $row->cantidad_caja ?>',
+		        		 						'<?php echo $row->ubicacion ?>'
 
-				        		 			<div class="col-6 btn-groups">
-				        		 				
-			        		 					<button class="btn btn-sm warn" data-toggle="modal" data-target="#top" 
-			        		 						onclick="modalEditProduct( 
-			        		 						'<?php echo $row->id ?>',
-			        		 						'<?php echo $row->codigo ?>',
-			        		 						'<?php echo $row->nombre ?>',
-			        		 						'<?php echo $row->idBrand ?>',
-			        		 						'<?php echo $row->idTipo ?>',
-			        		 						'<?php echo $row->idContNet ?>',
-			        		 						'<?php echo $row->cantidad ?>',
-			        		 						'<?php echo $row->cantidad_min ?>',
-			        		 						'<?php echo $row->cantidad_caja ?>',
-			        		 						'<?php echo $row->ubicacion ?>'
+		        		 						);">
 
-			        		 						);">
-
-
-							            			<i class="fa fa-pencil"></i>
-							            		</button>
-				        		 				
-				        		 			</div>
-								        </div>
+						            			<i class="fa fa-pencil"></i>
+						            		</button>
+				        		 			
+								        </p>
 
 				        		 	</td>
 

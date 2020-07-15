@@ -15,7 +15,7 @@
           </div>
           <div class="clear">
             <h4 class="m-0 text-md"><a href=""> <?php echo $this->data['countOfSells']->numberSells ?> <span class="text-sm">Ventas</span></a></h4>
-            <small class="text-muted">6 waiting payment.</small>
+            <small class="text-muted">Ventas realizadas</small>
           </div>
         </div>
       </div>

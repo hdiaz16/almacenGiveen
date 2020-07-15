@@ -2,15 +2,15 @@
 
 use CodeIgniter\Model;
 
-class DetalleVentasModel extends Model
+class BrandsModel extends Model
 {
-        protected $table      = 'det_sells_produc';
-        protected $primaryKey = 'id_det_sells';
+        protected $table      = 'ct_brand_products';
+        protected $primaryKey = 'id';
 
         protected $returnType = 'array';
         protected $useSoftDeletes = true;
 
-        protected $allowedFields = ['id_sell', 'id_products', 'quantity', 'created_at', 'updated_at', 'deleted_at'];
+        protected $allowedFields = ['name'];
 
         protected $useTimestamps = true;
         protected $createdField  = 'created_at';
@@ -20,11 +20,12 @@ class DetalleVentasModel extends Model
         protected $validationRules    = [];
         protected $validationMessages = [];
         protected $skipValidation     = false;
+
+        public function list_brand()
+        {
+            $query =  $this->db->query(" SELECT * FROM ct_brand_products ;" );
+            return $query->getResult();
+        }
+
         
-       
-
-
-
-        
-
 }
