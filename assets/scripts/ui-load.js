@@ -4,7 +4,7 @@
  * Deferred load js/css file, used for ui-jq.js and Lazy Loading.
  * 
  * @ flatfull.com All Rights Reserved.
- * Author url: http://themeforest.net/user/flatfull
+ * Author url: https://themeforest.net/user/flatfull
  */
 var uiLoad = uiLoad || {};
 

@@ -18,7 +18,7 @@
   <script src="libs/jquery/underscore/underscore-min.js"></script>
   <script src="libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
   <script src="libs/jquery/PACE/pace.min.js"></script>
-  <script type="text/javascript" src="libs/jquery/jquery.easy-pie-chart/js/jquery.easypiechart.fill.js"></script>
+  <script src="libs/jquery/jquery.easy-pie-chart/js/jquery.easypiechart.fill.js"></script>
 
   <script src="assets/scripts/config.lazyload.js"></script>
   <script src="assets/scripts/palette.js"></script>
@@ -47,6 +47,9 @@
   <script src="libs/jquery/footable/dist/footable.all.min.js"></script>
   <script src="assets/scripts/ajax.js"></script>
 <!-- endbuild -->
+
+ <!-- Datatable JS -->
+        <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 
   $('#productos').DataTable( {
@@ -99,6 +102,9 @@
 
   
 JsBarcode(".barcode").init();
+
+
+          $('#productos').DataTable();
 
 </script>
 </body>

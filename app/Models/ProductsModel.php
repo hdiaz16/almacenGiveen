@@ -100,4 +100,18 @@ class ProductsModel extends Model
             return $query->getRow();
         }
 
+
+        public function findProductId ($id)
+        {
+            $query =  $this->db->query(
+
+                " SELECT * 
+                FROM tbl_products 
+                WHERE id = \"".$id."\"
+                ;" 
+
+            );
+            return $query->getRow();
+        }
+
 }

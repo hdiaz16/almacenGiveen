@@ -9,7 +9,7 @@ class Ventas extends BaseController
 {
 
 	public $ventas;
-	public $products;
+	public $idProductRestQuantity;
 	public $request;
 	public $session;
 	public $data;
@@ -68,12 +68,26 @@ class Ventas extends BaseController
 
 
 		foreach ($idProducts as $key => $id) {
+	
 
 			$dataDet = [
 				'id_sell' 			=> $id_sell,
 				'id_products' 		=> $idProducts[$key],
 				'quantity' 			=> $quantity[$key]	
 			];
+
+			$idProductRestQuantity = $this->products->findProductId( $idProducts[$key] );
+
+			$actualCuanqityProduct = $idProductRestQuantity->cantidad - $quantity[$key];
+
+			$dataUpdateProducts = [
+				'cantidad' => $actualCuanqityProduct
+
+			];
+
+		
+			$update = $this->products->update($idProducts[$key], $dataUpdateProducts);
+
 
 			$resultDet = $this->detailsSells->insert($dataDet);	
 		}
@@ -82,6 +96,8 @@ class Ventas extends BaseController
 		
 
 
+
+		
 		if ( $resultDet != null  ) {
 
 			$result = array( 'error' => false, 'title' => "Venta guardada" ,'data' => "La venta se guardo correctamente" ); 

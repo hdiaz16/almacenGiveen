@@ -12,7 +12,7 @@
 			    <table id="productos" class="table-responsive" style="width:100%">
 			        <thead >
 			            <tr >
-			            	<th class="text-center">Opciones</th>
+			            	<th class="text-center">Imagen</th>
 			                <th class="text-center">Codigo</th>
 			                <th class="text-center">Nombre</th>
 			                <th class="text-center">Marca</th>
@@ -22,7 +22,7 @@
 			                <th class="text-center">Cantidad minima (por pieza)</th>
 			                <th class="text-center">Cantidad por caja (catidad de piezas por caja)</th>
 			                <th class="text-center">Ubicacion</th>
-			                <th class="text-center">Imagen</th>
+			                <th class="text-center">Opciones</th>
 
 			            </tr>
 			        </thead>
@@ -32,7 +32,17 @@
 			        		<?php if( $row->deleted_at == 0 ) { ?>
 
 			        			<tr class="text-center">
-				        		 	<td> 
+			        				<td> <img  class="zoom" src="<?php echo $row->img ?>" width="100"> </td>
+					                <td> <?php echo $row->codigo ?> </td>
+					                <td> <?php echo $row->nombre ?> </td>
+					                <td> <?php echo $row->nameBrand ?> </td>
+					                <td> <?php echo $row->nameTipo ?> </td>
+					                <td> <?php echo $row->nameContNet ?> </td>
+					                <td> <?php echo $row->cantidad ?> </td>
+					                <td> <?php echo $row->cantidad_min ?> </td>
+					                <td> <?php echo $row->cantidad_caja ?> </td>
+					                <td> <?php echo $row->ubicacion ?> </td>
+					                <td> 
 
 				        		 		<p class="btn-groups">
 				        		 		
@@ -62,17 +72,7 @@
 								        </p>
 
 				        		 	</td>
-
-					                <td> <?php echo $row->codigo ?> </td>
-					                <td> <?php echo $row->nombre ?> </td>
-					                <td> <?php echo $row->nameBrand ?> </td>
-					                <td> <?php echo $row->nameTipo ?> </td>
-					                <td> <?php echo $row->nameContNet ?> </td>
-					                <td> <?php echo $row->cantidad ?> </td>
-					                <td> <?php echo $row->cantidad_min ?> </td>
-					                <td> <?php echo $row->cantidad_caja ?> </td>
-					                <td> <?php echo $row->ubicacion ?> </td>
-					                <td> <img  class="zoom" src="<?php echo $row->img ?>" width="100"> </td>
+					                
 
 					            </tr>
 
@@ -88,7 +88,7 @@
 			        </tbody>
 			        <tfoot>
 			            <tr>
-			            	<th class="text-center">Opciones</th>
+			            	<th class="text-center">Imagen</th>
 			                <th class="text-center">Codigo</th>
 			                <th class="text-center">Nombre</th>
 			                <th class="text-center">Marca</th>
@@ -98,7 +98,7 @@
 			                <th class="text-center">Cantidad minima (por pieza)</th>
 			                <th class="text-center">Cantidad por caja (catidad de piezas por caja)</th>
 			                <th class="text-center">Ubicacion</th>
-			                <th class="text-center">Imagen</th>
+			                <th class="text-center">Opciones</th>
 			            </tr>
 			        </tfoot>
 			    </table>
